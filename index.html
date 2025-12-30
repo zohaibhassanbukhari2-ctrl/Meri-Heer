@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Madam G 💖</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { 
+            background-color: #ffdae9; 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            overflow: hidden; 
+        }
+                        .slide, .p-slide { display: none; animation: zoomIn 0.5s ease; }
+                        .slide.active, .p-slide.active { display: block; }
+        /* دلوں کی اینیمیشن: نیچے سے اوپر */
+        .heart { position: absolute; color: #f06292; animation: float linear infinite; z-index: 1; pointer-events: none; }
+        @keyframes float { 
+            from { transform: translateY(100vh); opacity: 1; }
+            to { transform: translateY(-110vh); opacity: 0; }
+        }
+
+        .main-container { position: relative; z-index: 10; text-align: center; }
+        .main-title { color: #d81b60; margin-bottom: 25px; font-size: 20px; transition: 0.5s; }
+
+        /* Envelope Styling */
+        .envelope { 
+            position: relative; width: 300px; height: 200px; 
+            background-color: #ff80ab; cursor: pointer; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+        }
+        .envelope::after { 
+            content: ""; position: absolute; bottom: 0; left: 0; 
+            border-left: 150px solid transparent; border-right: 150px solid transparent; 
+            border-bottom: 100px solid #f48fb1; z-index: 4; 
+        }
+        .flap { 
+            position: absolute; top: 0; left: 0; 
+            border-left: 150px solid transparent; border-right: 150px solid transparent; 
+            border-top: 120px solid #f06292; z-index: 5; 
+            transform-origin: top; transition: 0.6s; 
+        }
+
+        /* Letter Styling */
+        .letter { 
+            position: absolute; bottom: 0; left: 10px; 
+            width: 280px; background: white; z-index: 2; 
+            transition: 0.6s ease-in-out; padding: 20px; 
+            border-radius: 15px; text-align: center; opacity: 0; 
+        }
+
+        .envelope.open .flap { transform: rotateX(180deg); z-index: 1; }
+        .envelope.open .letter { 
+            opacity: 1; 
+            transform: translateY(-130px); 
+            z-index: 10; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            height: auto;
+        }
+
+        /* Circle Images */
+        .circle-img { 
+            width: 100px; height: 100px; 
+            object-fit: cover; 
+            border-radius: 50%; 
+            border: 3px solid #ff80ab;
+            margin-bottom: 15px; 
+        }
+
+        .btn-group { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+        .btn { padding: 8px 18px; border: none; border-radius: 20px; color: white; font-weight: bold; cursor: pointer; }
+        .f-btn { background: #4caf50; }
+        .p-btn { background: #f44336; }
+
+        /* Overlay & Slides */
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ffdae9; display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .card { width: 320px; background: white; padding: 30px; border-radius: 25px; text-align: center; border: 4px solid #d81b60; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .slide { display: none; animation: zoomIn 0.5s ease; }
+        .slide.active { display: block; }
+        @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .nav-btn { background: #d81b60; color: white; border: none; padding: 10px 25px; border-radius: 25px; margin-top: 20px; cursor: pointer; }
+
+    </style>
+</head>
+<body>
+
+<audio id="punishMusic" loop>
+    <source src="audio/sad.mp3" type="audio/mpeg">
+</audio>
+
+    <audio id="bgMusic" loop>
+        <source src="audio/bg Heer.mp3" type="audio/mpeg">
+    </audio>
+
+    
+
+    <div id="heart-box"></div>
+
+    <div class="main-container">
+        <h2 class="main-title" id="title-msg">For My Madam Heer... Please Open 🥺</h2>
+        <div class="envelope" id="env" onclick="handleOpen()">
+            <div class="flap"></div>
+            <div class="letter">
+                <img src="imges/Sorry.jpg" class="circle-img">
+                <p>I'm so sorry! Forgive me? <br> I’m not perfect,
+                     but I’m perfectly sorry. Can we go back to being 'Us' again? 🐾</p>
+                <div class="btn-group">
+                    <button class="btn f-btn" onclick="startSlider(event)">Forgive Me</button>
+                    <button class="btn p-btn" onclick="startPunishSlider(event)">Punish Me</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="forgive-screen" class="overlay">
+        <div class="card">
+            <div class="slide active">
+                <img src="imges/taaaa.jpg" class="circle-img">
+                <h3>Hellooo Cutiee 😍</h3>
+                <button class="nav-btn" onclick="nextSlide()">Click to Slide! ➔</button>
+            </div>
+            
+            <div class="slide">
+                <img src="imges/ufffff.gif" class="circle-img">
+                <h3 style="color: #d81b60; font-size: 28px;">I Have...</h3>
+                <button class="nav-btn" onclick="nextSlide()">➔</button>
+            </div>
+
+            <div class="slide">
+                <img src="imges/giveflower.gif" class="circle-img">
+                <h3 style="color: #d81b60; font-size: 28px;">A Message ❤</h3>
+                <button class="nav-btn" onclick="nextSlide()">➔</button>
+            </div>
+
+            <div class="slide">
+                <img src="imges/charing.gif" class="circle-img">
+                <p>You are the best! I'm very lucky to have you! 🌹</p>
+                <h2 style="color:#d81b60; margin-top: 10px;">I Love You Heer! ❤</h2>
+                <button class="nav-btn" onclick="location.reload()">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="punish-screen" class="overlay">
+    <div class="card">
+        <div class="p-slide active">
+            <img src="imges/bubu-cute-bubu-gun.gif" class="circle-img">
+            <h3>Oh no! So you chose violence? 😱</h3>
+            <button class="nav-btn" onclick="nextPunishSlide()">Next Saza! ➔</button>
+        </div>
+
+        <div class="p-slide">
+            <img src="imges/bubu-dudu-bubu-dudu-fight.gif" class="circle-img">
+            <h3>Saza ye hai ke... You have to listen to me forever! ⚖</h3>
+            <button class="nav-btn" onclick="nextPunishSlide()">Next ➔</button>
+        </div>
+
+        <div class="p-slide">
+            <img src="imges/kissing.gif" class="circle-img">
+            <h3>And you owe me 1000 Kisses! 😘</h3>
+            <button class="nav-btn" onclick="nextPunishSlide()">Next ➔</button>
+        </div>
+
+        <div class="p-slide">
+            <img src="imges/eat.gif" class="circle-img">
+            <h3>Plus... You have to take me on a treat! 🍕🍦</h3>
+            <button class="nav-btn" onclick="nextPunishSlide()">Final Saza ➔</button>
+        </div>
+
+        <div class="p-slide">
+            <img src="imges/walk.gif" class="circle-img">
+            <p>Actually, I can't stay mad at you...</p>
+            <h2 style="color:#d81b60;">I Love You! ❤</h2>
+            <button class="nav-btn" onclick="location.reload()">Accept & Reset</button>
+        </div>
+    </div>
+</div>
+    <script>
+  const pMusic = document.getElementById('punishMusic');
+
+function startPunishSlider(e) {
+    // ایونٹ کو روکنا تاکہ لفافہ بند نہ ہو
+    e.stopPropagation(); 
+    
+    // سزا والی اسکرین دکھانا
+    document.getElementById('punish-screen').style.display = 'flex';
+    
+    // میوزک کی سیٹنگز
+    pMusic.currentTime = 48 ; // 2 سیکنڈ آگے سے شروع
+    pMusic.volume = 1.0;    // آواز پوری رکھنا
+    
+    // میوزک پلے کرنا
+    let playPromise = pMusic.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            console.log("Punish music started!");
+        }).catch(error => {
+            console.log("Playback failed. Make sure link is correct:", error);
+        });
+    }
+}
+  
+        const music = document.getElementById('bgMusic');
+
+        function handleOpen() {
+            document.getElementById('env').classList.add('open');
+            document.getElementById('title-msg').style.opacity = '0';
+        }
+
+        function startSlider(e) {
+            e.stopPropagation();
+            document.getElementById('forgive-screen').style.display = 'flex';
+            
+            // میوزک کو 4 سیکنڈ آگے سے شروع کرنا
+            music.currentTime = 2; 
+            music.play().catch(err => console.log("Music play error: ", err));
+        }
+
+        function showPunish(e) {
+            e.stopPropagation();
+            document.getElementById('punish-screen').style.display = 'flex';
+        }
+
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        function nextSlide() {
+            slides[slideIndex].classList.remove('active');
+            slideIndex = (slideIndex + 1) % slides.length;
+            slides[slideIndex].classList.add('active');
+        }
+
+        // دلوں کی اینیمیشن
+        setInterval(() => {
+            const h = document.createElement('div');
+            h.innerHTML = '❤'; h.className = 'heart';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.top = '100vh';
+            h.style.fontSize = Math.random() * 20 + 10 + 'px';
+            h.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.getElementById('heart-box').appendChild(h);
+            setTimeout(() => h.remove(), 5000);
+                        
+        }, 300);
+
+     let punishIndex = 0;
+     const pSlides = document.querySelectorAll('.p-slide');
+     function nextPunishSlide() {
+    pSlides[punishIndex].classList.remove('active');
+    punishIndex = (punishIndex + 1) % pSlides.length;
+    pSlides[punishIndex].classList.add('active');
+}
+    </script>
+</body>
+</html>
